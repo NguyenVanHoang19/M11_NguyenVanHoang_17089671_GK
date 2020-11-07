@@ -53,3 +53,23 @@ app.post("/deleteSanPham",(req,res)=>{
         }
     });
 });
+
+// api deleteSanPham
+app.post("/api/deleteSanPhamAPI",(req,res)=>{
+    const maSP = req.body.maSP;
+    const paramsDeleteSanPham = {
+        TableName : "SanPham",
+        Key :{
+            "maSP":maSP,
+        },
+    };
+    dynamoDB.delete(paramsDeleteSanPham,(error,data)=>{
+        if(error){
+            console.log("Loi",error);
+            res.json({msg:error});
+        }
+        else{
+            res.json({msg:"Xóa thành công"});
+        }
+    });
+});
